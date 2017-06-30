@@ -9,7 +9,7 @@ contract('WhiteList', function(accounts) {
     let whiteList;
     let chunkNr=0;
 
-    it.only('vaidate address list', function() {
+    it('vaidate address list', function() {
         let errCounter=0;
         addrList.forEach((addr,i)=> {
             if (!eth.isAddress(addr)) {
@@ -62,7 +62,7 @@ contract('WhiteList', function(accounts) {
                    }).catch(()=>{
                      console.log('Failure at address', n, ', addr:',addr);
                    });
-            }).then(() => whiteList.sum()).then(_sum => {
+            }).then(() => whiteList.controlSum()).then(_sum => {
                 assert.equal(_sum.toString(),sum.toString(),"control sum mismatch");
             });
         });
