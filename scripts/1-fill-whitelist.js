@@ -3,7 +3,7 @@ const addrList = require("../cfi-whitelist.js") //.slice(10); //starting from 10
 const Promise = require("bluebird");
 const BigNumber = require('bignumber.js');
 const assert = require('assert');
-const BLOCK_LEN = 150;
+const BLOCK_LEN = 230;
 module.exports = function(done) {
 
     function toFinney(num) {
@@ -16,8 +16,9 @@ module.exports = function(done) {
     return WhiteList.deployed()
         .then(whiteList => {
             const args = [];
-            for(let i=0; i < addrList.length; i+=BLOCK_LEN) {
-                args.push(addrList.slice(i,i+BLOCK_LEN));
+            let cn=0;
+            for(let i=0; i < addrList.length; i+= (cn++<=2)?4:BLOCK_LEN) {
+                args.push(addrList.slice(i,i+(cn<=2?4:BLOCK_LEN)));
             }
             return whiteList.chunkNr()
                 .then(_chunkNr => {
@@ -31,7 +32,7 @@ module.exports = function(done) {
                                 process.stdout.write('Uploading chunk '+ chunkNr + ', length: ' + arg.length + ', gas: '+gas + ' ...');
                                 return whiteList.addPack(arg, chunkNr++, {gas:gas}).then(function() {
                                     recordNum += arg.length;
-                                    console.log(' DONE!');
+                                    console.log(' DONE!  gas:'+gas);
                                 });
                             });
                         });
