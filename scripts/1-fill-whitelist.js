@@ -12,8 +12,8 @@ module.exports = function(done) {
     }
     let recordNum=0;
     let totalGasUsed=0;
-    return WhiteList.deployed()
-    //return WhiteList.at("0x9411Cf70F97C2ED09325e58629D48401aEd50F89") // version 0.1.0: livenet
+    //return WhiteList.deployed()
+    return WhiteList.at("0x9411Cf70F97C2ED09325e58629D48401aEd50F89") // version 0.1.1: livenet
         .then(whiteList => {
             const args = [];
             let cn=0;

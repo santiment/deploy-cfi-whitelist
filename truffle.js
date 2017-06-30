@@ -6,7 +6,7 @@ module.exports = {
             network_id: 1,
             gas: 6700000,
             gasPrice: "10000000000"
-            //,from: "ADDRESS"
+           ,from: "0x008F8272ABFAC620E80393BF0cf23A01fDdf6667"
         },
         development: {
           host: "localhost",
