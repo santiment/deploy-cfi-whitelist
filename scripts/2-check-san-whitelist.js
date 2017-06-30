@@ -13,10 +13,10 @@ module.exports = function(done) {
 
     let whiteList;
     let controlSum = new BigNumber(0);
-    //return WhiteList.at("0xd2675d3ea478692ad34f09fa1f8bda67a9696bf7")
+    //return WhiteList.at("0x7dCB72ad13F89A3E6a97943073B03E65935e976E") v0.1.0 livenet
     return WhiteList.deployed()
     .then(whiteList=>{
-        //return WhiteListUser.at("0xE7c2AD4edfaa7d30126DD85b33be2EaD7fbDe32e")//v 0.3.1 livenet
+        //return WhiteListUser.at("0x1536f307FF0A68e1356507dDCCdfA2922A7ff48D")
         return WhiteListUser.deployed()
         .then(whiteListUser => {
             return Promise.each(addrList, (addr, n, len) => {

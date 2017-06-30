@@ -12,8 +12,8 @@ module.exports = function(done) {
     }
     let recordNum=0;
     let totalGasUsed=0;
-    //return WhiteList.at("") // version 0.3.1: livenet
-    return WhiteList.deployed()
+    //return WhiteList.deployed()
+    return WhiteList.at("0x7dCB72ad13F89A3E6a97943073B03E65935e976E") // version 0.1.0: livenet
         .then(whiteList => {
             const args = [];
             let cn=0;
@@ -23,7 +23,7 @@ module.exports = function(done) {
             return whiteList.chunkNr()
                 .then(_chunkNr => {
                     let chunkNr = _chunkNr.toNumber();
-                    console.log('chunkNr> '+ chunkNr);
+                    console.log('next chunkNr> '+ chunkNr);
                     return Promise.each(args, (arg, i) => {
                         if (i >= chunkNr)
                         return whiteList.addPack.estimateGas(arg, chunkNr)
