@@ -1,20 +1,37 @@
-var WhiteList = artifacts.require("./WhiteList.sol");
-var WhiteListUser = artifacts.require("./WhiteListUser.sol");
-var addrList = require("../cfi-whitelist.js");
-var Promise = require("bluebird");
-var BigNumber = require('bignumber.js');
+const WhiteList = artifacts.require("./WhiteList.sol");
+const WhiteListUser = artifacts.require("./WhiteListUser.sol");
+const addrList = require("../cfi-whitelist.js");
+const Promise = require("bluebird");
+const BigNumber = require('bignumber.js');
+const eth = require('ethereum-address');
 
 contract('WhiteList', function(accounts) {
     let whiteList;
     let chunkNr=0;
-    before('populate addresses', function(){
+
+    it.only('vaidate address list', function() {
+        let errCounter=0;
+        addrList.forEach((addr,i)=> {
+            if (!eth.isAddress(addr)) {
+                if (addr != "0xffb6781148D1F2b6415C25dFCA2CcafCAB4099D") {
+                    console.log('invalid adress #'+i+' addr: '+addr);
+                    ++errCounter;
+                } else { //known invalid address in CFI list
+                    console.log('WARN: known invalid adress #'+i+' addr: '+addr);
+                }
+            }
+        });
+        assert.notOk(errCounter, errCounter+' invalid adresses found!' )
+    });
+
+    it('populate addresses', function(){
         return WhiteList.deployed()
         .then(_whiteList => {
             whiteList = _whiteList;
             let BLOCK_LEN = 160;
             let promises = [];
             let args = [];
-            for(var i=0; i < addrList.length; i+=BLOCK_LEN) {
+            for(let i=0; i < addrList.length; i+=BLOCK_LEN) {
                 args.push(addrList.slice(i,i+BLOCK_LEN));
             }
             return Promise.each(args, function(arg) {

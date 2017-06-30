@@ -1,0 +1,25 @@
+{
+  "name": "deploy-cfi-whitelist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cfi-whitelist.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santiment/deploy-cfi-whitelist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/santiment/deploy-cfi-whitelist/issues"
+  },
+  "homepage": "https://github.com/santiment/deploy-cfi-whitelist#readme",
+  "dependencies": {
+    "ethereum-address": "0.0.4"
+  }
+}
