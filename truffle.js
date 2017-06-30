@@ -5,7 +5,7 @@ module.exports = {
             port: 8545,
             network_id: 1,
             gas: 6700000,
-            gasPrice: "21000000000"
+            gasPrice: "10000000000"
             //,from: "ADDRESS"
         },
         development: {

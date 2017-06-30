@@ -44,7 +44,7 @@ contract('WhiteList', function(accounts) {
 
     it("should be impossible to add more addresses after start (setupMode==false)", function(done) {
         let extraPack = [whiteList.address];
-        whiteList.addPack(extraPack, chunkNr++, {gas:4700000})
+        whiteList.addPack(extraPack, chunkNr, {gas:4700000})
         .then (tx    => done("exception expected"))
         .catch(error => done())
     });
@@ -62,8 +62,14 @@ contract('WhiteList', function(accounts) {
                    }).catch(()=>{
                      console.log('Failure at address', n, ', addr:',addr);
                    });
-            }).then(() => whiteList.controlSum()).then(_sum => {
+            }).then(() => Promise.all([
+                whiteList.controlSum(),
+                whiteList.recordNr(),
+                whiteList.chunkNr()
+            ])).spread( (_sum, _recordNr, _chunkNr) => {
                 assert.equal(_sum.toString(),sum.toString(),"control sum mismatch");
+                assert.equal(_recordNr.toString(),addrList.length,"total record num mismatch");
+                assert.equal(_chunkNr.toString(),chunkNr.toString(),"total chunk num mismatch");
             });
         });
     });

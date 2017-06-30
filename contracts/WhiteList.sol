@@ -1,10 +1,11 @@
 pragma solidity ^0.4.11;
 contract WhiteList {
-    string public constant VERSION = "0.1.0";
+    string public constant VERSION = "0.1.1";
 
     mapping(address=>bool) public contains;
-    uint16  public chunkNr = 0;
-    uint256 public controlSum = 0;
+    uint public chunkNr = 0;
+    uint public recordNr=0;
+    uint public controlSum = 0;
     bool public isSetupMode = true;
     address admin = msg.sender;
 
@@ -17,8 +18,9 @@ contract WhiteList {
         require ( chunkNr++ == _chunkNr);
         for(uint16 i=0; i<addrs.length; ++i){
             contains[addrs[i]] = true;
-            controlSum += uint160(addrs[i]);
+            controlSum += uint256(addrs[i]);
         }
+        recordNr += addrs.length;
     }
 
     //disable setup mode

@@ -3,7 +3,7 @@ const addrList = require("../cfi-whitelist.js") //.slice(10); //starting from 10
 const Promise = require("bluebird");
 const BigNumber = require('bignumber.js');
 const assert = require('assert');
-const BLOCK_LEN = 230;
+const BLOCK_LEN = 160;
 module.exports = function(done) {
 
     function toFinney(num) {
@@ -12,8 +12,8 @@ module.exports = function(done) {
     }
     let recordNum=0;
     let totalGasUsed=0;
-    //return WhiteList.deployed()
-    return WhiteList.at("0x7dCB72ad13F89A3E6a97943073B03E65935e976E") // version 0.1.0: livenet
+    return WhiteList.deployed()
+    //return WhiteList.at("0x9411Cf70F97C2ED09325e58629D48401aEd50F89") // version 0.1.0: livenet
         .then(whiteList => {
             const args = [];
             let cn=0;
