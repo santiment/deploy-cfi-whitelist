@@ -36,7 +36,7 @@ contract('WhiteList', function(accounts) {
         let sum = new BigNumber(0);
         return WhiteListUser.deployed().then(whiteListUser => {
             return Promise.each(addrList, (addr, n, len) => {
-                return whiteListUser.assert(addr)
+                return whiteListUser.assert(whiteList.address,addr)
                    .then(() => {
                         if (n % 100 == 99 || n == len-1) {
                             console.log('Verified ', n+1, ' addresses ');

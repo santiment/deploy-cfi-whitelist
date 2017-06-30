@@ -1,14 +1,12 @@
 pragma solidity ^0.4.11;
-import  './WhiteList.sol';
+
+contract I_WhiteList {
+    function contains(address) public returns(bool);
+}
 
 contract WhiteListUser {
-    WhiteList whiteList;
 
-    function WhiteListUser(WhiteList _whiteList){
-        whiteList = _whiteList;
-    }
-
-    function assert(address addr) external {
+    function assert(I_WhiteList whiteList, address addr) external {
       assert (whiteList.contains(addr));
     }
 
