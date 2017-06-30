@@ -4,13 +4,13 @@ module.exports = {
             host: "localhost",
             port: 8545,
             network_id: 1,
-            gas: 2000000,
-            gasPrice: "77000000000"
-            //,from: "0xADDRRESS"
+            gas: 6700000,
+            gasPrice: "21000000000"
+            //,from: "ADDRESS"
         },
         development: {
           host: "localhost",
-          gas: 4600000,
+          gas: 6700000,
           port: 8555,
           network_id: "*" // Match any network id
         }
